@@ -15,4 +15,7 @@ describe('Calculator test', ()=> { // Describing the test being performed in eng
 
 /**
  * All functions and methods available are found in the jest DOCS
+ * 
+ * Dependent on the developers preference the tests can be held in the same directory(folder) as the main scripts
+ * Or in another separate directory(folder)
  */
