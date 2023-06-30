@@ -7,7 +7,7 @@
 
 describe('Calculator test', ()=> { // Describing the test being performed in english in JS using the describe method
     describe('Addition test', () => {
-        test('Should return sium of 42', () => { // The test that is actually wanting to be tested
+        test('Should return sum of 42', () => { // The test that is actually wanting to be tested
             expect(addition(20, 22)).toBe(42) // The parameters being tested and the answer or the test with the toBe method
         })
     })
