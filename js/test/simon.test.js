@@ -1,4 +1,4 @@
-const { game, currentGame } = require('../scripts/simon')
+const { game, newGame, showScore, addTurn, showTurns, lightsOn } = require('../scripts/simon')
 // Same thing when importing the function into the testing file too. Using the {} allows multiple in one line of code
 
 beforeAll(() => {
@@ -27,5 +27,58 @@ describe('Game object contains correct keys', () => {
     })
     test('choices contains the correct ids', () => {
         expect(game.choices).toEqual(["button1", "button2", "button3", "button4"])
+    })
+})
+
+describe('New game function works correctly', () => {
+    // False data to check if the function is working correctly. And calling the newGame function
+    beforeAll(() => {
+        game.score = 42;
+        game.currentGame = [1, 3, 4, 6, 3, 2]
+        game.playerMoves = [1, 3, 4, 6, 3, 3]
+        document.getElementById('score').innerText = '42'
+        newGame()
+    })
+    test('game score reset to 0', () => {
+        expect(game.score).toEqual(0)
+    })
+    test('should be one element in the computers array', () => {
+        expect(game.currentGame.length).toBe(1)
+    })
+    test('clears player moves', () => {
+        expect(game.playerMoves.length).toBe(0)
+    })
+    test('clears computers moves', () => {
+        expect(game.playerMoves.length).toBe(0)
+    })
+    test('should display 0 on the dom score', () => {
+        expect(document.getElementById('score').innerText).toEqual(0)
+    })
+})
+
+describe('gameplay functions are working as intended', () => {
+    beforeEach(() => { // Runs before each test
+        game.score = 0;
+        game.currentGame = [];
+        game.playerMoves = [];
+        addTurn()
+    })
+    afterEach(() => { // Runs after each test. Clue in the name of each of the methods
+        game.score = 0;
+        game.playerMoves = [];
+        game.currentGame = [];
+    })
+    test('currentGame array has a length of 1', () => {
+        expect(game.currentGame.length).toEqual(1)
+    })
+    test('addTurn adds a turn to the currentGame array', () => {
+        addTurn();
+        expect(game.currentGame.length).toBe(2)
+    }) 
+    test('checking if the correct ids are added to the button', () => {
+        let button = document.getElementById(game.currentGame[0]);
+        lightsOn(game.currentGame[0]);
+        expect(button.classList).toContain('light') // classList is checking the classes on the element
+        // toContain is checking if the element contains the desired information
     })
 })
