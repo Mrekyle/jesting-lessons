@@ -17,11 +17,15 @@ beforeEach(() => {
     document.close // Closes the document
 })
 
-describe('Check button clicking', () => {
+describe('DOM Testing', () => {
     describe('Check if when the button is clicked the text on the page changes', () => {
         test('Should change the text on the page', () => {
             buttonTest(); // Call the function in the simulated DOM enviroment before checking if the test is passed or not with the expect
             expect(document.getElementById('par').innerHTML).toEqual("You Have Clicked on Test With Jest") 
         }) 
+        test('H1 Tag should exist', () => {
+            // expect(document.getElementsByTagName('h1')) - Works perfectly as desired. But if we are checking multiple we need to use the length
+            expect(document.getElementsByTagName('h1').length).toBe(1) // Checking if there is 1 h1 element. If 2 '2' should be expected... and so on
+        })
     })
 })

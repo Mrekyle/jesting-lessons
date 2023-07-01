@@ -1,0 +1,1 @@
+const simonGame = require('../scripts/simon')
