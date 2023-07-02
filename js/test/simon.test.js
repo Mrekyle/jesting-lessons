@@ -1,4 +1,4 @@
-const { game, newGame, showScore, addTurn, showTurns, lightsOn } = require('../scripts/simon')
+const { game, newGame, showScore, addTurn, showTurns, lightsOn, playerTurn } = require('../scripts/simon')
 // Same thing when importing the function into the testing file too. Using the {} allows multiple in one line of code
 
 beforeAll(() => {
@@ -60,6 +60,13 @@ describe('New game function works correctly', () => {
     test('turnNumber is reset in the newGame function', () => {
         expect(game.turnNumber).toEqual(0)
     })
+    test('all data-listeners are set to true', () => {
+        newGame()
+        const elements = document.getElementsByClassName('circle')
+        for (let element of elements) {
+            expect(element.getAttribute('data-listener')).toEqual('true')
+        }
+    })
 })
 
 describe('gameplay functions are working as intended', () => {
@@ -91,5 +98,10 @@ describe('gameplay functions are working as intended', () => {
         game.turnNumber = 42;
         showTurns();
         expect(game.turnNumber).toBe(0)
+    })
+    test('should increment the score if the correct circle is clicked', () => {
+        game.playerMoves.push(game.currentGame[0]);
+        playerTurn();
+        expect(game.score).toBe(1)
     })
 })

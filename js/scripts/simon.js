@@ -11,6 +11,17 @@ function newGame() {
     game.playerMoves = [];
     game.score = 0;
     game.turnNumber = 0;
+    for (let circle of document.getElementsByClassName('circle')) {
+        if (circle.getAttribute('data-listener') !== 'true') {
+            circle.addEventListener('click', (e) => {
+                let move = e.target.getAttribute('id');
+                lightsOn(move);
+                game.playerMoves.push(move)
+                playerTurn();
+            });
+            circle.setAttribute('data-listener', 'true');
+        }
+    }
     showScore();
     addTurn();    
 }
@@ -44,5 +55,16 @@ function lightsOn (circ) {
     }, 400);
 }
 
-module.exports = { game, newGame, showScore, addTurn, showTurns, lightsOn } // Adding it in curly brackets allows us to export multiple at once in one line of code. So the code
+function playerTurn () {
+    let i = game.playerMoves.length - 1;
+    if (game.currentGame[i] === game.playerMoves[i]) {
+        if (game.currentGame.length === game.playerMoves.length) {
+            game.score++
+            showScore();
+            addTurn();
+        }
+    }
+}
+
+module.exports = { game, newGame, showScore, addTurn, showTurns, lightsOn, playerTurn } // Adding it in curly brackets allows us to export multiple at once in one line of code. So the code
 // doesn't need to be repeated over and over again 
