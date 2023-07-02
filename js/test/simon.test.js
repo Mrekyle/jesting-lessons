@@ -28,6 +28,9 @@ describe('Game object contains correct keys', () => {
     test('choices contains the correct ids', () => {
         expect(game.choices).toEqual(["button1", "button2", "button3", "button4"])
     })
+    test('turnNumber exists in game', () => {
+        expect('turnNumber' in game).toBe(true)
+    })
 })
 
 describe('New game function works correctly', () => {
@@ -53,6 +56,9 @@ describe('New game function works correctly', () => {
     })
     test('should display 0 on the dom score', () => {
         expect(document.getElementById('score').innerText).toEqual(0)
+    })
+    test('turnNumber is reset in the newGame function', () => {
+        expect(game.turnNumber).toEqual(0)
     })
 })
 
