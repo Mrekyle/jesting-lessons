@@ -2,6 +2,8 @@ let game = {
     currentGame: [],
     playerMoves: [],
     turnNumber: 0,
+    lastButton: "",
+    turnInProgress: "",
     score: 0,
     choices: ["button1", "button2", "button3", "button4"]
 }
