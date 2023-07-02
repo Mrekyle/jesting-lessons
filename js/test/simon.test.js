@@ -81,4 +81,9 @@ describe('gameplay functions are working as intended', () => {
         expect(button.classList).toContain('light') // classList is checking the classes on the element
         // toContain is checking if the element contains the desired information
     })
+    test('showTurns should update game.turnNumber', () => {
+        game.turnNumber = 42;
+        showTurns();
+        expect(game.turnNumber).toBe(0)
+    })
 })
