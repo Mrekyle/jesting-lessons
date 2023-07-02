@@ -1,6 +1,8 @@
 const { game, newGame, showScore, addTurn, showTurns, lightsOn, playerTurn } = require('../scripts/simon')
 // Same thing when importing the function into the testing file too. Using the {} allows multiple in one line of code
 
+jest.spyOn(window, 'alert').mockImplementation(() => { })
+
 beforeAll(() => {
     let fs = require('fs');
     let fileContents = fs.readFileSync('simon.html', ('utf-8'))
@@ -103,5 +105,10 @@ describe('gameplay functions are working as intended', () => {
         game.playerMoves.push(game.currentGame[0]);
         playerTurn();
         expect(game.score).toBe(1)
+    })
+    test('should call an alert if the playerMove is wrong', () => {
+        game.playerMoves.push('wrong');
+        playerTurn();
+        expect(window.alert).toBeCalledWith("Wrong move!")
     })
 })

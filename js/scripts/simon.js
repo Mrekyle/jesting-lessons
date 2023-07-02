@@ -55,16 +55,20 @@ function lightsOn (circ) {
     }, 400);
 }
 
-function playerTurn () {
+function playerTurn() {
     let i = game.playerMoves.length - 1;
     if (game.currentGame[i] === game.playerMoves[i]) {
         if (game.currentGame.length === game.playerMoves.length) {
-            game.score++
+            game.score++;
             showScore();
             addTurn();
         }
+    } else {
+        alert("Wrong move!");
+        newGame();
     }
 }
+
 
 module.exports = { game, newGame, showScore, addTurn, showTurns, lightsOn, playerTurn } // Adding it in curly brackets allows us to export multiple at once in one line of code. So the code
 // doesn't need to be repeated over and over again 
